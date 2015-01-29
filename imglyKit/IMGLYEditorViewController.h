@@ -12,6 +12,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class IMGLYEditorMainMenuView;
+
 /**
  IMGLYEditorViewController provides editing capabilities for photos.
  */
@@ -43,6 +45,8 @@
  The job will contain all used operations, and can be used for stack processing or similar.
  */
 @property (nonatomic, copy) IMGLYEditorViewControllerCompletionHandler completionHandler;
+
+@property (nonatomic, strong) IMGLYEditorMainMenuView *editorMainMenuView;
 
 - (void)resetAllChanges;
 

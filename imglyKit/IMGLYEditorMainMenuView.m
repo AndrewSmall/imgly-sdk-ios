@@ -27,8 +27,7 @@ static const CGFloat kLabelXPositionOffset = -20;
 static const CGFloat kLabelYPosition = 42;
 
 @interface IMGLYEditorMainMenuView ()
- 
-@property (nonatomic, strong) NSArray *metaDataArray;
+
 @property (nonatomic, strong) NSMutableDictionary *buttonToMetaDataDictionary;
 @property (nonatomic, strong) id<IMGLYEditorImageProvider> imageProvider;
 @property (nonatomic, strong) UIButton *magicButton; // we need to keep a reference to this button cos we need to change its state
@@ -78,6 +77,10 @@ static const CGFloat kLabelYPosition = 42;
 }
 
 - (void) configureMetaDataArray {
+    if (_metaDataArray) {
+        // Was customized outside of this instance.
+        return;
+    }
     _metaDataArray = [NSArray arrayWithObjects:
                       [[IMGLYMainMenuEntryMetaData alloc] initWithText:@"Magic"
                                                                image:[_imageProvider magicButtonIcon]

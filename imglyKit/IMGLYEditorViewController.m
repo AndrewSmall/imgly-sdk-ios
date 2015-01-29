@@ -31,7 +31,6 @@ static const CGFloat kEditorMainMenuViewHeight = 95;
 
 @interface IMGLYEditorViewController () <IMGLYEditorMainMenuDelegate, IMGLYAvailableFilterListProvider>
 
-@property (nonatomic, strong) IMGLYEditorMainMenuView *editorMainMenuView;
 @property (nonatomic, strong) UIImageView *imagePreview;
 @property (nonatomic, strong) UIImageView *bottomImageView;
 @property (nonatomic, strong) IMGLYProcessingJob *finalProcessingJob;
@@ -87,7 +86,9 @@ static const CGFloat kEditorMainMenuViewHeight = 95;
 }
 
 - (void)configureMainMenu {
-    self.editorMainMenuView = [[IMGLYEditorMainMenuView alloc] initWithFrame:CGRectZero];
+    if (!self.editorMainMenuView) {
+        self.editorMainMenuView = [[IMGLYEditorMainMenuView alloc] initWithFrame:CGRectZero];
+    }
     self.editorMainMenuView.menuDelegate = self;
     self.editorMainMenuView.userInteractionEnabled = YES;
     [self.view addSubview:self.editorMainMenuView];
