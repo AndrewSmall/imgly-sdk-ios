@@ -20,6 +20,7 @@
 #import "IMGLYEditorFilterViewController.h"
 #import "IMGLYEditorOrientationViewController.h"
 #import "IMGLYEditorBrightnessViewController.h"
+#import "IMGLYEditorFocusViewController.h"
 #import "IMGLYEditorContrastViewController.h"
 #import "IMGLYEditorSaturationViewController.h"
 #import "IMGLYEditorNoiseViewController.h"
