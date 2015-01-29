@@ -31,7 +31,7 @@ static const CGFloat kLabelYPosition = 42;
 @property (nonatomic, strong) NSMutableDictionary *buttonToMetaDataDictionary;
 @property (nonatomic, strong) id<IMGLYEditorImageProvider> imageProvider;
 @property (nonatomic, strong) UIButton *magicButton; // we need to keep a reference to this button cos we need to change its state
-
+@property (nonatomic, strong) NSArray *metaDataArray;
 @end
 
 @implementation IMGLYEditorMainMenuView
@@ -41,6 +41,17 @@ static const CGFloat kLabelYPosition = 42;
     if (self == nil)
         return nil;
     _imageProvider = imageProvider;
+    [self commonInit];
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame imageProvider:(id<IMGLYEditorImageProvider>)imageProvider metaDataArray:(NSArray *)metaDataArray
+{
+    self = [super initWithFrame:frame];
+    if (self == nil)
+        return nil;
+    _imageProvider = imageProvider;
+    _metaDataArray = metaDataArray;
     [self commonInit];
     return self;
 }
@@ -78,7 +89,6 @@ static const CGFloat kLabelYPosition = 42;
 
 - (void) configureMetaDataArray {
     if (_metaDataArray) {
-        // Was customized outside of this instance.
         return;
     }
     _metaDataArray = [NSArray arrayWithObjects:

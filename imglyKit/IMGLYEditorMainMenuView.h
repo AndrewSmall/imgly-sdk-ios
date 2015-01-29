@@ -15,9 +15,8 @@
 
 @property (nonatomic, weak) id<IMGLYEditorMainMenuDelegate> menuDelegate;
 
-@property (nonatomic, strong) NSArray *metaDataArray;
-
 - (instancetype)initWithFrame:(CGRect)frame imageProvider:(id<IMGLYEditorImageProvider>)imageProvider;
+- (instancetype)initWithFrame:(CGRect)frame imageProvider:(id<IMGLYEditorImageProvider>)imageProvider metaDataArray:(NSArray *)metaDataArray;
 - (void)setMagicActive;
 - (void)setMagicInActive;
 
