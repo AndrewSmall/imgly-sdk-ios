@@ -221,12 +221,16 @@ static const CGFloat kEditorMainMenuViewHeight = 95;
     }
     else {
         IMGLYAbstractEditorBaseViewController *viewController = [[viewControllerClass alloc] initWithImageProvider:self.imageProvider];
-        viewController.inputImage = self.previewImage;
-        viewController.completionHandler=^(IMGLYEditorViewControllerResult result, UIImage *outputImage, IMGLYProcessingJob *job){
-            [self completedEditingWithResult:result outputImage:outputImage job:job];
-        };
-        [self.navigationController imgly_pushFadeViewController:viewController];
+        [self pushEditorViewController:viewController];
     }
+}
+
+- (void)pushEditorViewController:(IMGLYAbstractEditorBaseViewController *)viewController {
+    viewController.inputImage = self.previewImage;
+    viewController.completionHandler=^(IMGLYEditorViewControllerResult result, UIImage *outputImage, IMGLYProcessingJob *job){
+        [self completedEditingWithResult:result outputImage:outputImage job:job];
+    };
+    [self.navigationController imgly_pushFadeViewController:viewController];
 }
 
 #pragma mark - sub-editor completion handler
