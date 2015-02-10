@@ -28,3 +28,4 @@
 #import "IMGLYEditorResetViewController.h"
 #import "IMGLYEditorCropViewController.h"
 #import "UINavigationController+IMGLYAdditions.h"
+#import "IMGLYEditorCropViewController.h"
