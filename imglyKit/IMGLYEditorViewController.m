@@ -254,22 +254,27 @@ static const CGFloat kEditorMainMenuViewHeight = 95;
     __weak IMGLYEditorViewController *weakSelf = self;
     dispatch_async(_contextQueue, ^{
         IMGLYEditorViewController *strongSelf = weakSelf;
-        NSInteger maximaleSideLength = [IMGLYOpenGLUtils maximumTextureSizeForThisDevice];
-        NSLog(@"maximaleSideLength %ld", (long)maximaleSideLength);
-        UIImage *image = [strongSelf resizeInputImageIfNeeded:strongSelf.inputImage
-                                      maximalSideLength:maximaleSideLength];
-        [IMGLYPhotoProcessor sharedPhotoProcessor].inputImage = image;
-        [[IMGLYPhotoProcessor sharedPhotoProcessor] performProcessingJob:strongSelf.finalProcessingJob];
-        UIImage *outputImage = [IMGLYPhotoProcessor sharedPhotoProcessor].outputImage;
+        if (strongSelf) {
+            NSInteger maximaleSideLength = [IMGLYOpenGLUtils maximumTextureSizeForThisDevice];
+            NSLog(@"maximaleSideLength %ld", (long)maximaleSideLength);
+            UIImage *image = [strongSelf resizeInputImageIfNeeded:strongSelf.inputImage
+                                          maximalSideLength:maximaleSideLength];
+            [IMGLYPhotoProcessor sharedPhotoProcessor].inputImage = image;
+            [[IMGLYPhotoProcessor sharedPhotoProcessor] performProcessingJob:strongSelf.finalProcessingJob];
+            UIImage *outputImage = [IMGLYPhotoProcessor sharedPhotoProcessor].outputImage;
 
-        // Clean up
-        _inputImage = nil;
-        _previewImage = nil;
+            // Clean up
+            _inputImage = nil;
+            _previewImage = nil;
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            [strongSelf completeWithResult:IMGLYEditorViewControllerResultDone image:outputImage job:strongSelf.finalProcessingJob];
-        });
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+                [strongSelf completeWithResult:IMGLYEditorViewControllerResultDone image:outputImage job:strongSelf.finalProcessingJob];
+            });
+        }
+        else {
+            NSLog(@"IMGLY lost self (IMGLYEditorViewController) before processing image");
+        }
     });
 }
 
